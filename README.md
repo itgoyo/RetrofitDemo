@@ -72,10 +72,18 @@ public  Interface Service{
 
 * 2
 ```java
-new Retrofit.Builder.baseUrl("你请求的网站地址")
-.addConverterFactory(
-    new Conver
-)
+new Retrofit.Builder.baseUrl("你请求的网站地址（必须以"/结尾"）")
+.addConverterFactory(new Converter.Factory() {
+                    @Override
+                    public Converter<ResponseBody, ?> responseBodyConverter(Type type,Annotation[] annotations, Retrofit retrofit) {
+                        return new Converter<ResponseBody, String>() {
+                            @Override
+                            public String convert(ResponseBody value) throws IOException {
+                                return value.string();
+                            }
+                        };
+                    }
+                }).build();
 ```
 如果请求返回是比较复杂的json数据格式
 
