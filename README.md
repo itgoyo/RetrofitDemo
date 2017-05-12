@@ -97,6 +97,13 @@ new Retrofit.Builder.baseUrl("你请求的网站地址")
         call.enqueue(this);
 ```
 
+Retorfit在请求数据的时候，如果地址只是个别名称不一样的话，可以直接封装成一个方法方便调用
+```
+@GET("/api/{category}/list")
+Call<Tngou> getList
+(@Path(category) String category, @Query("id") int id,@Query("page") int page,@Query("raws")int raws);
+```
+
 如果想要图片的样式变得好看的可以使用**CardView**
 ```
 compile 'com.android.support:cardview-v7:25.1.1'
